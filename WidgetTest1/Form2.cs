@@ -147,7 +147,7 @@ namespace WidgetTest1
         private void Form2_Load(object sender, EventArgs e)
         {
             win.Add(findWinners(stringMassive(@"localfile1.txt"), wrestWinners(numberPosition)));
-            
+            win[0].allClear();
             
             parseHTML("http://www.elecomt.ru/smartritsa/prize", @"localfile1.html");
             parseHTML("http://www.elecomt.ru/smartritsa_managers/prize", @"localfile2.html");
