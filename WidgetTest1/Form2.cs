@@ -15,8 +15,8 @@ namespace WidgetTest1
 {
     public partial class Form2 : Form
     {
-        List<string> massL = new List<string>();
-        string[] mass = new string[1000];
+        List<string> massKL = new List<string>();
+        List<string> massMP = new List<string>();
         List<Winners> win = new List<Winners>();
         int kolVo;
         int numberPosition = 0;
@@ -172,30 +172,25 @@ namespace WidgetTest1
             
             kolVo = Convert.ToInt32(textBox1.Text);
             numberPosition = findWinners();
-            massL = stringMassive(@"localfile1.txt");
+            massKL = stringMassive(@"localfile1.txt");
             for (int i = 0; i < kolVo; i++)
             {
-                if (i == 0) win.Add(getWinners(massL, numberPosition)); //1вый проход
+                if (i == 0) win.Add(getWinners(massKL, numberPosition)); //1вый проход
                 else
                 {
                     //2рой проход
-                    numberPosition = findWinners(massL, numberPosition);
-                    win.Add(getWinners(massL, numberPosition));
+                    numberPosition = findWinners(massKL, numberPosition);
+                    win.Add(getWinners(massKL, numberPosition));
                 }
-            }
-
-            for (int i = 0; i < win.Count; i++) // Фиксирование строк
-            {
                 win[i].allClear();
             }
             //parseHTML("http://www.elecomt.ru/smartritsa/prize", @"localfile1.html");
             //parseHTML("http://www.elecomt.ru/smartritsa_managers/prize", @"localfile2.html");
-
-            string k="jj";
             //Timer t = new Timer();
             //t.Interval = 600000;
             //t.Tick += (timer, arguments) => Run();
             //t.Start();
+            toolStripStatusLabel1.Text = "Получен список победителей.";
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -223,6 +218,16 @@ namespace WidgetTest1
                 toolStripStatusLabel1.Text = "Ошибка в открытии страницы!";
             }
 
+        }
+
+        private void import_Excel_Click(object sender, EventArgs e)
+        {
+            Excel excelImp = new Excel();
+            for (int i = 1; i <= kolVo; i++)
+            {
+                excelImp.PrintinRow(i + 1, win[i - 1], true);
+            }
+            excelImp.excelVisible();
         }
     }
 }
