@@ -38,6 +38,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.import_Excel = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -132,11 +133,21 @@
             this.toolStripProgressBar1.Name = "toolStripProgressBar1";
             this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
             // 
+            // import_Excel
+            // 
+            this.import_Excel.Location = new System.Drawing.Point(72, 213);
+            this.import_Excel.Name = "import_Excel";
+            this.import_Excel.Size = new System.Drawing.Size(130, 23);
+            this.import_Excel.TabIndex = 8;
+            this.import_Excel.Text = "Импорт в Excel";
+            this.import_Excel.UseVisualStyleBackColor = true;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.import_Excel);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.checkBox_manager);
             this.Controls.Add(this.checkBox_client);
@@ -167,5 +178,6 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
+        private System.Windows.Forms.Button import_Excel;
     }
 }

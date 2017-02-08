@@ -32,29 +32,6 @@ namespace WidgetTest1
             prize = Regex.Replace(prize, regExp, string.Empty);
         }
 
-        public void PrintinRow()
-        {
-            //заполнение в Excel.
-
-            Microsoft.Office.Interop.Excel.Application ObjExcel = new Microsoft.Office.Interop.Excel.Application();
-            Microsoft.Office.Interop.Excel.Workbook ObjWorkBook;
-            Microsoft.Office.Interop.Excel.Worksheet ObjWorkSheet;
-            //Книга.
-            ObjWorkBook = ObjExcel.Workbooks.Add(System.Reflection.Missing.Value);
-            //Таблица.
-            ObjWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)ObjWorkBook.Sheets[1];
-
-
-            //Заполняем значениями.
-            //Значения [y - строка,x - столбец]
-            ObjWorkSheet.Cells[3, 1] = 1;
-            ObjWorkSheet.Cells[3, 2] = 2;
-            ObjWorkSheet.Cells[3, 3] = 3;
-
-
-            //В итоге, делаем созданную эксельку видимой и доступной!
-            ObjExcel.Visible = true;
-            ObjExcel.UserControl = true;
-        }
+        
     }
 }
