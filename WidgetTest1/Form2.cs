@@ -99,18 +99,30 @@ namespace WidgetTest1
             File.Move(nameLocal, Path.ChangeExtension(nameLocal, ".txt"));  //Изменить формат полученной страницы.
         }
 
-        public int findWinners()
+        public int findWinners() // первую строку код, hidden-tablet
         {
             int startSearch = 0; //Нужно найти позицию <div class = "hidden-tablet">.
             string line = "";
             StreamReader reader = new StreamReader(@"localfile1.txt");
-            while (!line.Contains("<div class = \"hidden-tablet\">")) // Попробовать RegEx
+            while (!line.Contains("<div class = \"hidden-tablet\">")) // 
             {
                 line = reader.ReadLine();
                 startSearch++;
             }
             reader.Close();
             return startSearch;
+        }
+
+        public int findWinners(List<string> fullTXT, int curPos) // последующий поиск span3
+        {
+            curPos += 50; //Нужно найти позицию <div class = \"span3\".
+            StreamReader reader = new StreamReader(@"localfile1.txt");
+            while (!fullTXT[curPos].Contains("<div class = \"span3\">")) // 
+            {
+                curPos++;
+            }
+            reader.Close();
+            return curPos - 1;
         }
 
         public List<string> stringMassive(string fileN) // Получить лист ТХТ
@@ -127,7 +139,7 @@ namespace WidgetTest1
             return fullTXT;
         }
 
-        public Winners findWinners(List<string> fullTXT,int posSearch) // Ключевой поиск 1ой позиции
+        public Winners getWinners(List<string> fullTXT,int posSearch) // Ключевой поиск 1ой позиции
         {
             int id;
             string company, date, winner, prize;
@@ -150,14 +162,29 @@ namespace WidgetTest1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
             kolVo = Convert.ToInt32(textBox1.Text);
             numberPosition = findWinners();
-            win.Add(findWinners(stringMassive(@"localfile1.txt"), numberPosition));
-            
-            win[0].allClear();
+            massL = stringMassive(@"localfile1.txt");
+            for (int i = 0; i < kolVo; i++)
+            {
+                if (i == 0) win.Add(getWinners(massL, numberPosition)); //1вый проход
+                else
+                {
+                    //2рой проход
+                    numberPosition = findWinners(massL, numberPosition);
+                    win.Add(getWinners(massL, numberPosition));
+                }
+            }
 
+            for (int i = 0; i < win.Count; i++) // Фиксирование строк
+            {
+                win[i].allClear();
+            }
             //parseHTML("http://www.elecomt.ru/smartritsa/prize", @"localfile1.html");
             //parseHTML("http://www.elecomt.ru/smartritsa_managers/prize", @"localfile2.html");
+
+            string k="jj";
             //Timer t = new Timer();
             //t.Interval = 600000;
             //t.Tick += (timer, arguments) => Run();
@@ -174,6 +201,14 @@ namespace WidgetTest1
             {
                 textBox1.Text = "";
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            parseHTML("http://www.elecomt.ru/smartritsa/prize", @"localfile1.html");
+            parseHTML("http://www.elecomt.ru/smartritsa_managers/prize", @"localfile2.html");
+
         }
     }
 }
