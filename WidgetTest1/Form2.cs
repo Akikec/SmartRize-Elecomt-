@@ -18,9 +18,8 @@ namespace WidgetTest1
         List<string> massL = new List<string>();
         string[] mass = new string[1000];
         List<Winners> win = new List<Winners>();
-
-        int k = 0;
-        public int numberPosition = 0;
+        int kolVo;
+        int numberPosition = 0;
 
         public Form2()
         {
@@ -100,7 +99,7 @@ namespace WidgetTest1
             File.Move(nameLocal, Path.ChangeExtension(nameLocal, ".txt"));  //Изменить формат полученной страницы.
         }
 
-        public int wrestWinners(int i)
+        public int findWinners()
         {
             int startSearch = 0; //Нужно найти позицию <div class = "hidden-tablet">.
             string line = "";
@@ -114,7 +113,7 @@ namespace WidgetTest1
             return startSearch;
         }
 
-        public List<string> stringMassive(string fileN)
+        public List<string> stringMassive(string fileN) // Получить лист ТХТ
         {
             List<string> fullTXT = new List<string>();
             string line;
@@ -128,7 +127,7 @@ namespace WidgetTest1
             return fullTXT;
         }
 
-        public Winners findWinners(List<string> fullTXT,int posSearch)
+        public Winners findWinners(List<string> fullTXT,int posSearch) // Ключевой поиск 1ой позиции
         {
             int id;
             string company, date, winner, prize;
@@ -146,15 +145,35 @@ namespace WidgetTest1
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            win.Add(findWinners(stringMassive(@"localfile1.txt"), wrestWinners(numberPosition)));
-            win[0].allClear();
             
-            parseHTML("http://www.elecomt.ru/smartritsa/prize", @"localfile1.html");
-            parseHTML("http://www.elecomt.ru/smartritsa_managers/prize", @"localfile2.html");
-            Timer t = new Timer();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            kolVo = Convert.ToInt32(textBox1.Text);
+            numberPosition = findWinners();
+            win.Add(findWinners(stringMassive(@"localfile1.txt"), numberPosition));
+            
+            win[0].allClear();
+
+            //parseHTML("http://www.elecomt.ru/smartritsa/prize", @"localfile1.html");
+            //parseHTML("http://www.elecomt.ru/smartritsa_managers/prize", @"localfile2.html");
+            //Timer t = new Timer();
             //t.Interval = 600000;
             //t.Tick += (timer, arguments) => Run();
             //t.Start();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Convert.ToInt32(textBox1.Text);
+            }
+            catch
+            {
+                textBox1.Text = "";
+            }
         }
     }
 }
