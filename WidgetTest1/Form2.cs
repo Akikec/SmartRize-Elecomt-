@@ -92,11 +92,18 @@ namespace WidgetTest1
         //}
 
 
-        public void parseHTML(string link, string nameLocal)
+        public bool parseHTML(string link, string nameLocal)
         {
-            WebClient client = new WebClient(); 
-            client.DownloadFile(link, nameLocal);                           //Скачать страницу.
-            File.Move(nameLocal, Path.ChangeExtension(nameLocal, ".txt"));  //Изменить формат полученной страницы.
+            try
+            {
+                WebClient client = new WebClient();
+                string pathTxt = Path.ChangeExtension(nameLocal, ".txt");
+                client.DownloadFile(link, nameLocal);                           //Скачать страницу.
+                if (File.Exists(pathTxt)) File.Delete(pathTxt);
+                File.Move(nameLocal, pathTxt);  //Изменить формат полученной страницы.
+                return true;
+            }
+            catch { return false; }
         }
 
         public int findWinners() // первую строку код, hidden-tablet
@@ -205,9 +212,16 @@ namespace WidgetTest1
 
         private void button2_Click(object sender, EventArgs e)
         {
-
-            parseHTML("http://www.elecomt.ru/smartritsa/prize", @"localfile1.html");
-            parseHTML("http://www.elecomt.ru/smartritsa_managers/prize", @"localfile2.html");
+            try
+            {
+                //if (parseHTML("http://www.elecomt.ru/smartritsa/prize", @"localfile1.html")) checkBox_client.Checked = true;
+                //if (parseHTML("http://www.elecomt.ru/smartritsa_managers/prize", @"localfile2.html")) checkBox_manager.Checked = true;
+                toolStripStatusLabel1.Text = "Выгрузка страницы завершена.";
+            }
+            catch
+            {
+                toolStripStatusLabel1.Text = "Ошибка в открытии страницы!";
+            }
 
         }
     }
