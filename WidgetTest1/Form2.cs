@@ -27,73 +27,13 @@ namespace WidgetTest1
         public Form2()
         {
             InitializeComponent();
+            if (File.Exists(@"localfile1.txt") && File.Exists(@"localfile2.txt"))
+            {
+                checkBox_client.Checked = true;
+                checkBox_manager.Checked = true;
+                findWin_But.Enabled = true;
+            }
         }
-
-        //public void Run()
-        //{
-        //    int i = 0;
-        //    WebClient client = new WebClient();
-        //    client.Encoding = Encoding.GetEncoding(1251);
-        //    //client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
-        //    Stream data = client.OpenRead("http://www.elecomt.ru/smartritsa/prize");
-        //    StreamReader reader = new StreamReader(data, Encoding.GetEncoding(1251));
-        //    while ((line = reader.ReadLine()) != null)
-        //    {
-        //        line = reader.ReadLine();
-        //        //if (i == 1000) break;
-        //        massL.Add(line);
-        //        //mass[i] = line;
-        //        i++;
-        //    }
-        //    data.Close();
-        //    reader.Close();
-
-        //    //for (int j = 0; j < i - 5; j++)
-        //    //{
-        //    //    if (mass[j].IndexOf("hidden-tablet") >= 0) k = j;
-        //    //}
-
-        //    //line = mass[k].Trim();
-        //    //line = line.Substring(39, 3);
-        //    //numberPosition = Convert.ToInt32(Regex.Replace(line, @"[^\d]+", ""));
-        //    //label1.Text = Convert.ToString("Позиция: " + numberPosition + " Время: " + System.DateTime.Now.ToLongTimeString());
-        //    client.DownloadFile("http://www.elecomt.ru/smartritsa/prize", @"localfile.html");
-
-        //    StreamWriter file = new StreamWriter (@"stat.txt", false, Encoding.GetEncoding(1251));
-        //    for(int j = 0; j < massL.Count; j++)
-        //    {
-        //        file.WriteLine(massL[j]);
-        //    }
-        //    file.Close();
-            
-        //}
-
-        //public void FindPos()
-        //{
-        //    int i = 0;
-        //    StreamReader reader = new StreamReader(@"localfile.html"); //, Encoding.GetEncoding(1251)
-        //    StreamWriter file = new StreamWriter(@"stat.txt",false);
-        //    while ((line = reader.ReadLine()) != null)
-        //    {
-        //        line = reader.ReadLine();
-        //        //if (i == 1000) break;
-        //        massL.Add(line);
-        //        file.WriteLine(massL[i]);
-        //        //mass[i] = line;
-        //        i++;
-        //    }
-        //    file.Close();
-        //    reader.Close();
-        //    File.Move(@"localfile.html", Path.ChangeExtension(@"localfile.html", ".txt"));
-
-        //    //StreamWriter file = new StreamWriter(@"stat.txt");
-        //    //for (int j = 0; j < massL.Count; j++)
-        //    //{
-        //    //    file.WriteLine(massL[j]);
-        //    //}
-        //    //file.Close();
-        //}
-
 
         public bool parseHTML(string link, string nameLocal)
         {
@@ -153,9 +93,6 @@ namespace WidgetTest1
         {
             int id;
             string company, date, winner, prize;
-            //win[numberPosition].company = Regex.Match(fullTXT[startSearch + 5], @"(>)S.+(<)").Value;
-            //Regex.Match(fullTXT[0], @"(>)S.+(<)");
-            //Console.WriteLine(match[0].Groups[1].Value);
             id = Convert.ToInt32(Regex.Match(fullTXT[posSearch + 3], @"\d{3}").Value);
             company = Regex.Match(fullTXT[posSearch + 5], @"(>)S.+(<)").Value;
             date = Regex.Match(fullTXT[posSearch + 9], @"\d{2}").Value + Regex.Match(fullTXT[posSearch + 11], @"(>)\S{3}(<)").Value;
@@ -188,15 +125,9 @@ namespace WidgetTest1
             toolStripProgressBar1.Value = 50;
             setWinners(@"localfile2.txt", kolVo);
             toolStripProgressBar1.Value = 100;
-
-
-            //parseHTML("http://www.elecomt.ru/smartritsa/prize", @"localfile1.html");
-            //parseHTML("http://www.elecomt.ru/smartritsa_managers/prize", @"localfile2.html");
-            //Timer t = new Timer();
-            //t.Interval = 600000;
-            //t.Tick += (timer, arguments) => Run();
-            //t.Start();
             toolStripStatusLabel1.Text = "Получен список победителей.";
+
+            import_Excel.Enabled = true;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -216,8 +147,11 @@ namespace WidgetTest1
             try
             {
                 if (parseHTML("http://www.elecomt.ru/smartritsa/prize", @"localfile1.html")) checkBox_client.Checked = true;
+                toolStripProgressBar1.Value = 50;
                 if (parseHTML("http://www.elecomt.ru/smartritsa_managers/prize", @"localfile2.html")) checkBox_manager.Checked = true;
+                toolStripProgressBar1.Value = 100;
                 toolStripStatusLabel1.Text = "Выгрузка страницы завершена.";
+                findWin_But.Enabled = true;
             }
             catch
             {
@@ -235,6 +169,7 @@ namespace WidgetTest1
                 win[i-1].allClear();
                 excelImp.PrintinRow(i + 1, win[i - 1], kl);
             }
+            toolStripStatusLabel1.Text = "Выгрузка Excel завершена.";
             excelImp.excelVisible();
         }
 

@@ -32,7 +32,6 @@ namespace WidgetTest1
         {
             string giperLink1 = Convert.ToString("=ГИПЕРССЫЛКА(\"http://www.elecomt.ru/admin/edit/games/" + Convert.ToString(win.id) + "\";" + Convert.ToString(win.id));
             string giperLink2 = Convert.ToString("=ГИПЕРССЫЛКА(\"http://www.elecomt.ru/admin/edit/games/_managers/" + Convert.ToString(win.id) + "\";" + Convert.ToString(win.id));
-            char TT = '\x0022';
             //Заполняем значениями.
             //Значения [y - строка,x - столбец]
             if (kl) ObjWorkSheet.Cells[column, 1] = Convert.ToString(win.id); //Нужно исправить ошибку
@@ -44,8 +43,7 @@ namespace WidgetTest1
         }
         public void excelVisible()
         {
-           
-            //В итоге, делаем созданную эксельку видимой и доступной!
+            //Делаем созданную эксельку видимой и доступной!
             ObjExcel.Visible = true;
             ObjExcel.UserControl = true;
         }

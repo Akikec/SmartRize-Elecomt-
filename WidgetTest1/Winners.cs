@@ -25,7 +25,7 @@ namespace WidgetTest1
         
         public void allClear()
         {
-            string regExp = @"[<,>]|alt=|[\u0022,\\]|(Smartрица от компании )|( для менеджеров компании)";
+            string regExp = @"[<,>]|alt=|[\u0022,\\]|(Smartрица )|(от компании )|( для менеджеров компании)";
             company = Regex.Replace(company, regExp, string.Empty);
             date = Regex.Replace(date, regExp, string.Empty);
             winner = Regex.Replace(winner, regExp, string.Empty);
