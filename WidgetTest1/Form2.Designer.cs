@@ -31,9 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.findWin_But = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.button2 = new System.Windows.Forms.Button();
+            this.download_But = new System.Windows.Forms.Button();
             this.checkBox_client = new System.Windows.Forms.CheckBox();
             this.checkBox_manager = new System.Windows.Forms.CheckBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -64,15 +64,15 @@
             this.textBox1.Text = "0";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // button1
+            // findWin_But
             // 
-            this.button1.Location = new System.Drawing.Point(52, 63);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Выгрузить";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.findWin_But.Location = new System.Drawing.Point(52, 63);
+            this.findWin_But.Name = "findWin_But";
+            this.findWin_But.Size = new System.Drawing.Size(75, 23);
+            this.findWin_But.TabIndex = 2;
+            this.findWin_But.Text = "Выгрузить";
+            this.findWin_But.UseVisualStyleBackColor = true;
+            this.findWin_But.Click += new System.EventHandler(this.findWin_Click);
             // 
             // progressBar1
             // 
@@ -81,15 +81,15 @@
             this.progressBar1.Size = new System.Drawing.Size(100, 23);
             this.progressBar1.TabIndex = 3;
             // 
-            // button2
+            // download_But
             // 
-            this.button2.Location = new System.Drawing.Point(16, 22);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(162, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Выгрузить страницы:";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.download_But.Location = new System.Drawing.Point(16, 22);
+            this.download_But.Name = "download_But";
+            this.download_But.Size = new System.Drawing.Size(162, 23);
+            this.download_But.TabIndex = 4;
+            this.download_But.Text = "Выгрузить страницы:";
+            this.download_But.UseVisualStyleBackColor = true;
+            this.download_But.Click += new System.EventHandler(this.download_But_Click);
             // 
             // checkBox_client
             // 
@@ -151,7 +151,7 @@
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.progressBar1);
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.findWin_But);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(-16, 62);
@@ -169,14 +169,14 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.checkBox_manager);
             this.Controls.Add(this.checkBox_client);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.download_But);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form2";
             this.Text = "Отчет Smart-Рицы";
-            this.Load += new System.EventHandler(this.Form2_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -190,9 +190,9 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button findWin_But;
         private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button download_But;
         private System.Windows.Forms.CheckBox checkBox_client;
         private System.Windows.Forms.CheckBox checkBox_manager;
         private System.Windows.Forms.StatusStrip statusStrip1;

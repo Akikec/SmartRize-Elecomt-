@@ -18,8 +18,11 @@ namespace WidgetTest1
         List<string> massKL = new List<string>();
         List<string> massMP = new List<string>();
         List<Winners> win = new List<Winners>();
+
         int kolVo;
         int numberPosition = 0;
+
+        Excel excelImp = new Excel();
 
         public Form2()
         {
@@ -106,11 +109,11 @@ namespace WidgetTest1
             catch { return false; }
         }
 
-        public int findWinners() // первую строку код, hidden-tablet
+        public int findWinners(string nameLocal) // первую строку код, hidden-tablet
         {
             int startSearch = 0; //Нужно найти позицию <div class = "hidden-tablet">.
             string line = "";
-            StreamReader reader = new StreamReader(@"localfile1.txt");
+            StreamReader reader = new StreamReader(nameLocal);
             while (!line.Contains("<div class = \"hidden-tablet\">")) // 
             {
                 line = reader.ReadLine();
@@ -162,17 +165,10 @@ namespace WidgetTest1
             return fWin;
         }
 
-        private void Form2_Load(object sender, EventArgs e)
+        public void setWinners(string nameLocal, int kolVo)
         {
-            
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
-            kolVo = Convert.ToInt32(textBox1.Text);
-            numberPosition = findWinners();
-            massKL = stringMassive(@"localfile1.txt");
+            numberPosition = findWinners(nameLocal);
+            massKL = stringMassive(nameLocal);
             for (int i = 0; i < kolVo; i++)
             {
                 if (i == 0) win.Add(getWinners(massKL, numberPosition)); //1вый проход
@@ -182,8 +178,18 @@ namespace WidgetTest1
                     numberPosition = findWinners(massKL, numberPosition);
                     win.Add(getWinners(massKL, numberPosition));
                 }
-                win[i].allClear();
             }
+        }
+
+        private void findWin_Click(object sender, EventArgs e)
+        {
+            kolVo = Convert.ToInt32(textBox1.Text);
+            setWinners(@"localfile1.txt", kolVo);
+            toolStripProgressBar1.Value = 50;
+            setWinners(@"localfile2.txt", kolVo);
+            toolStripProgressBar1.Value = 100;
+
+
             //parseHTML("http://www.elecomt.ru/smartritsa/prize", @"localfile1.html");
             //parseHTML("http://www.elecomt.ru/smartritsa_managers/prize", @"localfile2.html");
             //Timer t = new Timer();
@@ -205,12 +211,12 @@ namespace WidgetTest1
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void download_But_Click(object sender, EventArgs e)
         {
             try
             {
-                //if (parseHTML("http://www.elecomt.ru/smartritsa/prize", @"localfile1.html")) checkBox_client.Checked = true;
-                //if (parseHTML("http://www.elecomt.ru/smartritsa_managers/prize", @"localfile2.html")) checkBox_manager.Checked = true;
+                if (parseHTML("http://www.elecomt.ru/smartritsa/prize", @"localfile1.html")) checkBox_client.Checked = true;
+                if (parseHTML("http://www.elecomt.ru/smartritsa_managers/prize", @"localfile2.html")) checkBox_manager.Checked = true;
                 toolStripStatusLabel1.Text = "Выгрузка страницы завершена.";
             }
             catch
@@ -222,12 +228,19 @@ namespace WidgetTest1
 
         private void import_Excel_Click(object sender, EventArgs e)
         {
-            Excel excelImp = new Excel();
-            for (int i = 1; i <= kolVo; i++)
+            bool kl = true;
+            for (int i = 1; i <= kolVo*2; i++)
             {
-                excelImp.PrintinRow(i + 1, win[i - 1], true);
+                if (i > kolVo && kl == true) kl = false;
+                win[i-1].allClear();
+                excelImp.PrintinRow(i + 1, win[i - 1], kl);
             }
             excelImp.excelVisible();
+        }
+
+        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            excelImp.Quit();
         }
     }
 }

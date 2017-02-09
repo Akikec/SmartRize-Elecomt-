@@ -30,22 +30,28 @@ namespace WidgetTest1
 
         public void PrintinRow(int column, Winners win, bool kl)
         {
-            string giperLink1 = "=ГИПЕРССЫЛКА(\"http://www.elecomt.ru/admin/edit/games/" + Convert.ToString(win.id) + "\";" + Convert.ToString(win.id) + ")";
-            string giperLink2 = "=ГИПЕРССЫЛКА(\"http://www.elecomt.ru/admin/edit/games/_managers/" + Convert.ToString(win.id) + "\";" + Convert.ToString(win.id) + ")";
+            string giperLink1 = Convert.ToString("=ГИПЕРССЫЛКА(\"http://www.elecomt.ru/admin/edit/games/" + Convert.ToString(win.id) + "\";" + Convert.ToString(win.id));
+            string giperLink2 = Convert.ToString("=ГИПЕРССЫЛКА(\"http://www.elecomt.ru/admin/edit/games/_managers/" + Convert.ToString(win.id) + "\";" + Convert.ToString(win.id));
+            char TT = '\x0022';
             //Заполняем значениями.
             //Значения [y - строка,x - столбец]
-            //if (kl) ObjWorkSheet.Cells[column, 1] = giperLink1; //Нужно исправить ошибку
-            //else ObjWorkSheet.Cells[column, 1] = giperLink2;
+            if (kl) ObjWorkSheet.Cells[column, 1] = Convert.ToString(win.id); //Нужно исправить ошибку
+            else ObjWorkSheet.Cells[column, 1] = Convert.ToString(win.id);
             ObjWorkSheet.Cells[column, 2] = win.company;
             ObjWorkSheet.Cells[column, 3] = win.prize;
             ObjWorkSheet.Cells[column, 4] = win.winner;
             ObjWorkSheet.Cells[column, 5] = win.date;
         }
         public void excelVisible()
-        { 
+        {
+           
             //В итоге, делаем созданную эксельку видимой и доступной!
             ObjExcel.Visible = true;
             ObjExcel.UserControl = true;
+        }
+        public void Quit()
+        {
+            ObjExcel.Quit();
         }
     }
 }
