@@ -35,7 +35,7 @@ namespace WidgetTest1
             //Заполняем значениями.
             //Значения [y - строка,x - столбец]
             if (kl) ObjWorkSheet.Cells[column, 1].FormulaLocal = giperLink1; //Нужно исправить ошибку
-            else ObjWorkSheet.Cells[column, 1] = Convert.ToString(win.id);
+            else ObjWorkSheet.Cells[column, 1].FormulaLocal = giperLink2;
             ObjWorkSheet.Cells[column, 2] = win.company;
             ObjWorkSheet.Cells[column, 3] = win.prize;
             ObjWorkSheet.Cells[column, 4] = win.winner;
