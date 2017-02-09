@@ -34,7 +34,7 @@ namespace WidgetTest1
             string giperLink2 = Convert.ToString("=ГИПЕРССЫЛКА(\"http://www.elecomt.ru/admin/edit/games/_managers/" + Convert.ToString(win.id) + "\";" + Convert.ToString(win.id));
             //Заполняем значениями.
             //Значения [y - строка,x - столбец]
-            if (kl) ObjWorkSheet.Cells[column, 1] = Convert.ToString(win.id); //Нужно исправить ошибку
+            if (kl) ObjWorkSheet.Cells[column, 1].FormulaLocal = giperLink1; //Нужно исправить ошибку
             else ObjWorkSheet.Cells[column, 1] = Convert.ToString(win.id);
             ObjWorkSheet.Cells[column, 2] = win.company;
             ObjWorkSheet.Cells[column, 3] = win.prize;
