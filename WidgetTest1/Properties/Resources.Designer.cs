@@ -63,9 +63,9 @@ namespace WidgetTest1.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _8a6e5e1f0ae8d48e1580ac2df33eac6c {
+        internal static System.Drawing.Bitmap logo__1_ {
             get {
-                object obj = ResourceManager.GetObject("8a6e5e1f0ae8d48e1580ac2df33eac6c", resourceCulture);
+                object obj = ResourceManager.GetObject("logo__1_", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

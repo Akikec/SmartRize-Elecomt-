@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace WidgetTest1
 {
-    public partial class Form2 : Form
+    public partial class MainForm : Form
     {
         List<string> massKL = new List<string>();
         List<string> massMP = new List<string>();
@@ -24,7 +24,7 @@ namespace WidgetTest1
 
         Excel excelImp = new Excel();
 
-        public Form2()
+        public MainForm()
         {
             InitializeComponent();
             if (File.Exists(@"localfile1.txt") && File.Exists(@"localfile2.txt"))
