@@ -113,9 +113,6 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripProgressBar1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 363);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(284, 22);
@@ -157,6 +154,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Image = global::WidgetTest1.Properties.Resources.logo__1_;
             this.pictureBox1.ImageLocation = "C:\\Users\\Gareev\\Pictures\\logo (1).png";
             this.pictureBox1.Location = new System.Drawing.Point(0, 23);
             this.pictureBox1.Name = "pictureBox1";
@@ -165,7 +163,7 @@
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
             // 
-            // Form2
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -181,7 +179,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form2";
+            this.Name = "MainForm";
             this.Text = "Отчет Smart-Рицы";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
             this.statusStrip1.ResumeLayout(false);
