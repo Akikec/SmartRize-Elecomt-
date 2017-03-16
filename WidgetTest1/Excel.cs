@@ -31,7 +31,7 @@ namespace WidgetTest1
         public void PrintinRow(int column, Winners win, bool kl)
         {
             string giperLink1 = Convert.ToString("=ГИПЕРССЫЛКА(\"http://www.elecomt.ru/admin/edit/games/" + Convert.ToString(win.id) + "\";" + Convert.ToString(win.id));
-            string giperLink2 = Convert.ToString("=ГИПЕРССЫЛКА(\"http://www.elecomt.ru/admin/edit/games/_managers/" + Convert.ToString(win.id) + "\";" + Convert.ToString(win.id));
+            string giperLink2 = Convert.ToString("=ГИПЕРССЫЛКА(\"http://www.elecomt.ru/admin/edit/game_managers/" + Convert.ToString(win.id) + "\";" + Convert.ToString(win.id));
             //Заполняем значениями.
             //Значения [y - строка,x - столбец]
             if (kl) ObjWorkSheet.Cells[column, 1].FormulaLocal = giperLink1; //Нужно исправить ошибку
@@ -49,6 +49,8 @@ namespace WidgetTest1
         }
         public void Quit()
         {
+            ObjWorkBook = null;
+            ObjWorkSheet = null;
             ObjExcel.Quit();
         }
     }
