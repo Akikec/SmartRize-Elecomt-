@@ -178,5 +178,11 @@ namespace WidgetTest1
         {
             excelImp.Quit();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            RegExEdit rgE = new RegExEdit();
+            rgE.Show();
+        }
     }
 }

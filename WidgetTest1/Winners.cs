@@ -23,10 +23,12 @@ namespace WidgetTest1
             this.winner = winner;
             this.prize = prize;      
         }
-        
+
         public void allClear()
         {
-            string regExp = @"[<,>]|alt=|[\u0022,\\]|(Smartрица )|(от компании )|( для менеджеров компании)";
+            string regExp;
+            if (Properties.Settings.Default.RegExSetting != null) regExp = @"[<,>]|alt=|[\u0022,\\]|(Smartрица )|(от компании )|( для менеджеров компании)|" + Properties.Settings.Default.RegExSetting;
+            else regExp = @"[<,>]|alt=|[\u0022,\\]|(Smartрица )|(от компании )|( для менеджеров компании)"; 
             company = Regex.Replace(company, regExp, string.Empty);
             date = Regex.Replace(date, regExp, string.Empty);
             date = correctDate(date);
