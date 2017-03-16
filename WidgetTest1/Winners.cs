@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace WidgetTest1
 {
@@ -18,9 +19,9 @@ namespace WidgetTest1
         {
             this.id = id;
             this.company = company;
-            this.date = date;
+            this.date = date; 
             this.winner = winner;
-            this.prize = prize;
+            this.prize = prize;      
         }
         
         public void allClear()
@@ -28,8 +29,17 @@ namespace WidgetTest1
             string regExp = @"[<,>]|alt=|[\u0022,\\]|(Smartрица )|(от компании )|( для менеджеров компании)";
             company = Regex.Replace(company, regExp, string.Empty);
             date = Regex.Replace(date, regExp, string.Empty);
+            date = correctDate(date);
             winner = Regex.Replace(winner, regExp, string.Empty);
             prize = Regex.Replace(prize, regExp, string.Empty);
+        }
+
+        string correctDate(string date)
+        {
+            DateTime dt = DateTime.Parse(date);
+            dt.AddYears(2017);
+            date = dt.ToString("dd.MM.yyyy");
+            return date;
         }
     }
 }

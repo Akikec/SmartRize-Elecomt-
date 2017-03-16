@@ -171,6 +171,7 @@ namespace WidgetTest1
             }
             toolStripStatusLabel1.Text = "Выгрузка Excel завершена.";
             excelImp.excelVisible();
+            excelImp.Quit();
         }
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
